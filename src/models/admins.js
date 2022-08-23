@@ -73,7 +73,7 @@ adminSchema.methods.toJSON = function () {
   return adminObject;
 };
 
-// This generate a new token for a admin
+// This generate a new token for an admin
 adminSchema.methods.generateAuthToken = async function () {
   const admin = this;
   const token = await jwt.sign({ _id: admin._id.toString() }, JWT_SECRET);

@@ -11,7 +11,7 @@ exports.addProperty = async (req, res) => {
   // Validating request body
   const { error, value } = newPropertySchema.validate(req.body);
   if (error) {
-    return res.status(404).send({ status: "error", message: error.message });
+    return res.status(statusCode.BAD_REQUEST).send({ status: "error", message: error.message });
   }
   try {
     // checking if category name exist in database
@@ -57,7 +57,7 @@ exports.getOne = async (req, res) => {
   const { _id } = req.params;
   try {
     const property = await Property.findById(_id);
-    res.send({ status: "success", data: property });
+    res.status(statusCodes.OK).send({ status: "success", data: property });
   } catch (error) {
     res
       .status(400)
@@ -69,12 +69,12 @@ exports.addPropertyImg = async (req, res) => {
   try {
     const property = await Property.findById(_id);
     const images = await imagesUpload(req.files, property.name);
-    propery.images = [...property?.images, ...images];
+    property.images = [...property?.images, ...images];
     await property.save();
-    res.send({ status: "success", data: property });
+    res.status(statusCodes.ACCEPTED).send({ status: "success", data: property });
   } catch (error) {
     res
-      .status(400)
+      .status(statusCodes.SERVER_ERROR)
       .send({ status: "error", message: error.message || "An error occured" });
   }
 };
@@ -86,10 +86,10 @@ exports.deletePropertyImg = async (req, res) => {
     const property = await Property.findById(_id);
     property.images = property.images.filter((image) => image !== imgUrl);
     await property.save();
-    res.send({ status: "success", data: property });
+    res.status(statusCodes.OK).send({ status: "success", data: property });
   } catch (error) {
     res
-      .status(400)
+      .status(statusCodes.SERVER_ERROR)
       .send({ status: "error", message: error.message || "An error occured" });
   }
 };
@@ -98,7 +98,7 @@ exports.updateProperty = async (req, res) => {
   const { _id } = req.params;
   const { error, value } = updateSchema.validate(req.body);
   if (error) {
-    return res.status(400).send({ status: "error", message: error.message });
+    return res.status(statusCodes.BAD_REQUEST).send({ status: "error", message: error.message });
   }
   try {
     const property = await Property.findById(_id);
@@ -106,9 +106,9 @@ exports.updateProperty = async (req, res) => {
       property[update] = value[update];
     }
     await property.save();
-    res.send({ status: "success", data: property });
+    res.status(statusCodes.ACCEPTED).send({ status: "success", data: property });
   } catch (error) {
-    res.status(500).send({
+    res.status(statusCodes.SERVER_ERROR).send({
       status: "error",
       message: error.message || "An error occured. Try again",
     });
@@ -121,24 +121,24 @@ exports.deleteProperty = async (req, res) => {
     const property = await Property.findByIdAndDelete({ _id });
     if (!property) {
       return res
-        .status(400)
+        .status(statusCodes.BAD_REQUEST)
         .send({
           status: "error",
           message: `Property with id ${_id} not found`,
         });
     }
-    res.send({
+    res.status(statusCodes.OK).send({
       status: "success",
       message: `Property with id ${_id} was deleted successfully`,
     });
   } catch (error) {
     if (error.name === "CastError") {
-      return res.status(400).send({
+      return res.status(statusCodes.BAD_REQUEST).send({
         status: "error",
         message: `Property with id ${_id} not found`,
       });
     }
-    res.status(500).send({
+    res.status(statusCodes.SERVER_ERROR).send({
       status: "error",
       message: error.message || "An error occured. Try again",
     });

@@ -12,8 +12,8 @@ const sendWelcomeMail = (name, email, callback) => {
   let mailOptions = {
     from: EMAIL,
     to: email,
-    subject: "Thanks for joining in!",
-    text: `Welcome to our Task management app, ${name}. Let me know how you get along with the app`,
+    subject: "JOPA SAVVY",
+    text: `Welcome to our site, ${name}. Let me know how you get along with the app`,
   };
 
   transporter.sendMail(mailOptions);
@@ -23,7 +23,7 @@ const sendGoodbyeMail = (name, email) => {
   let mailOptions = {
     from: EMAIL,
     to: email,
-    subject: "Sorry to see you go!",
+    subject: "JOPA SAVVY",
     text: `Goodbye, ${name}. I hope to see you sometime soon.`,
   };
 

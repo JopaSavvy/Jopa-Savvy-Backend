@@ -1,17 +1,25 @@
-// Import the functions you need from the SDKs you need
 const {initializeApp} = require("firebase/app")
 const {getStorage} = require("firebase/storage")
+const {
+  FIREBASE_APIKEY,
+  FIREBASE_AUTHDOMAIN,
+  FIREBASE_PROJECTID,
+  FIREBASE_STORAGEBUCKET,
+  FIREBASE_MESSAGESENDERID,
+  FIREBASE_APPID,
+} = require("../helpers/secrets");
 
-// Your web app's Firebase configuration
+// Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCxSj7Dje1HMuJcIKNg8UgyIBlacVMJfE0",
-  authDomain: "jopa-savvy.firebaseapp.com",
-  projectId: "jopa-savvy",
-  storageBucket: "jopa-savvy.appspot.com",
-  messagingSenderId: "845566925125",
-  appId: "1:845566925125:web:b872dcb902ed5dea81c62c",
+  apiKey: FIREBASE_APIKEY,
+  authDomain: FIREBASE_AUTHDOMAIN,
+  projectId: FIREBASE_PROJECTID,
+  storageBucket: FIREBASE_STORAGEBUCKET,
+  messagingSenderId: FIREBASE_MESSAGESENDERID,
+  appId: FIREBASE_APPID
 };
 
-// Initialize Firebase
+// Initialize Firebase app
 const app = initializeApp(firebaseConfig);
+// initializing storege
 exports.storage = getStorage(app);
