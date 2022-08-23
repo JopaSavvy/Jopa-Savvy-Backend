@@ -1,7 +1,7 @@
 require("dotenv/config");
-const { BCRYPT_SALT, JWT_SECRET, MONGODB_URL } = process.env;
+const { BCRYPT_SALT, JWT_SECRET, MONGODB_URL_DEV, MONGODB_URL_PROD } = process.env;
 
-const credentials = ["BCRYPT_SALT", "JWT_SECRET", "MONGODB_URL"];
+const credentials = ["BCRYPT_SALT", "JWT_SECRET", "MONGODB_URL_DEV", "MONGODB_URL_PROD"];
 
 for (const credential of credentials) {
   if (process.env[credential] === undefined) {
@@ -13,5 +13,6 @@ for (const credential of credentials) {
 module.exports = {
   BCRYPT_SALT,
   JWT_SECRET,
-  MONGODB_URL,
+  MONGODB_URL_DEV,
+  MONGODB_URL_PROD,
 };

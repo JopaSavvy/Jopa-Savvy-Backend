@@ -1,8 +1,13 @@
 const mongoose = require("mongoose");
-const validator = require("validator");
 
 const propertySchema = new mongoose.Schema(
   {
+    name: {
+      type: String,
+      trim: true,
+      required: true,
+      lowercase: true,
+    },
     description: {
       type: String,
       trim: true,
@@ -14,39 +19,27 @@ const propertySchema = new mongoose.Schema(
     },
     quantity: {
       type: Number,
-      required: true,      
+      required: true,
     },
     category: {
-      type: String,
-      trim: true,
+      type: Object,
       required: true,
     },
     stockStatus: {
       type: String,
-      default: "In Stock",
+      default: "in_stock",
       validate(value) {
-        if (value !== "In Stock" || value !== "Out of Stock") {
-          throw new Error("Stock status should be In stock or Out of Stock");
+        if (value !== "in_stock" && value !== "out_of_stock") {
+          throw new Error("Stock status should be in_stock or out_of_stock");
         }
       },
     },
-    images: [
-      {
-        image: {
-          type: String,
-          required: true,
-        },
-      },
-    ],
-    avatar: {
-      type: String,
-    },
+    images: [String],
   },
   {
     timestamps: true,
   }
 );
-
 
 const Property = mongoose.model("Property", propertySchema);
 
