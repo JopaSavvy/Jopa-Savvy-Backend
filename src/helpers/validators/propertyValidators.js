@@ -8,12 +8,12 @@ const updateSchema = Joi.object({
   price: Joi.number(),
   quantity: Joi.number(),
   category: text,
-  stockStatus: Joi.string().custom((value, helper) => {
-    if (value !== "In Stock" && value !== "Out of Stock") {
-      return helper.message("status should be In Stock or Out of Stock");
-    }
-    return true;
-  }),
+  // stockStatus: Joi.string().custom((value, helper) => {
+  //   if (value !== "In Stock" && value !== "Out of Stock") {
+  //     return helper.message("status should be In Stock or Out of Stock");
+  //   }
+  //   return true;
+  // }),
 });
 const newPropertySchema = Joi.object({
   name: requiredText,

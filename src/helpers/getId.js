@@ -1,5 +1,5 @@
 const getId = async (model) => {
-  const number = await model.estimatedCount();
+  const number = await model.estimatedDocumentCount();
   let text = (number + 1).toString();
 
   if (text.length < 4) {

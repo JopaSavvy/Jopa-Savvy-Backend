@@ -14,8 +14,8 @@ router.get("/", getAll);
 router.get("/:_id", getOne);
 router.post("/", upload.array("images"), addProperty);
 router.patch("/:_id", updateProperty);
-router.post("/:_id", upload.array("images"), addPropertyImg);
+router.post("/images/:_id", upload.array("images"), addPropertyImg);
+router.delete("/images/:_id", deletePropertyImg);
 router.delete("/:_id", deleteProperty);
-router.delete("/:_id", deletePropertyImg);
 
 module.exports = router;

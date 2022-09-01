@@ -28,11 +28,11 @@ const propertySchema = new mongoose.Schema(
     stockStatus: {
       type: String,
       default: "in_stock",
-      validate(value) {
-        if (value !== "in_stock" && value !== "out_of_stock") {
-          throw new Error("Stock status should be in_stock or out_of_stock");
-        }
-      },
+      // validate(value) {
+      //   if (value !== "in_stock" && value !== "out_of_stock") {
+      //     throw new Error("Stock status should be in_stock or out_of_stock");
+      //   }
+      // },
     },
     images: [String],
   },

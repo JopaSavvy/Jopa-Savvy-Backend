@@ -16,4 +16,5 @@ swagger(app);
 app.use("/api/properties", propertyRouter);
 app.use("/api/categories", categoryRouter);
 
+
 module.exports = app;

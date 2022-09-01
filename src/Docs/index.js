@@ -5,8 +5,8 @@ const options = {
 const specs = {
   openapi: "3.0.0",
   info: {
-    title: "JOPPA API",
-    description: "The API endpoints documentation for the softstudy API",
+    title: "JJopa-Savvy API",
+    description: "The API endpoints documentation for the Jopa-Savvy API",
     version: "1.0.0",
   },
   servers: [
@@ -106,7 +106,7 @@ const specs = {
           price: "20000",
           quantity: 20,
           category: "Electronics",
-          stockStatus: "In stock"
+          stockStatus: "In stock",
         },
       },
     },

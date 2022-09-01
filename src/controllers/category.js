@@ -31,7 +31,7 @@ exports.getAll = async (req, res) => {
         .status(statusCodes.NO_CONTENT)
         .send({ status: "error", message: "No category found" });
     }
-    res.status(statusCodes.OK).send({ status: "success", data: categories });
+    res.status(statusCodes.OK).send({ status: "success", data: [...categories] });
   } catch (error) {
     res.status(statusCodes.SERVER_ERROR).send({
       status: "error",
@@ -49,8 +49,14 @@ exports.getOne = async (req, res) => {
         .status(statusCodes.BAD_REQUEST)
         .send({ status: "error", message: "No category found" });
     }
-    res.status(statusCodes.Ok).send({ status: "success", data: category });
+    res.status(statusCodes.OK).send({ status: "success", data: category });
   } catch (error) {
+     if (error.kind === "ObjectId") {
+       return res
+         .status(statusCodes.NOT_FOUND)
+         .send({ status: "error", message: "Category not found" });
+     }
+
     res.status(statusCodes.SERVER_ERROR).send({
       status: "error",
       message: error.message || "Failed to retrieve category. Try again",
@@ -66,7 +72,7 @@ exports.updateCategory = async (req, res) => {
       .status(statusCodes.BAD_REQUEST)
       .send({ status: "error", message: error.message });
   }
-  const updates = Object.keys(value);
+  const updates = Object.keys(req.body);
   try {
     const category = await Category.findById(_id);
     if (!category) {
@@ -91,10 +97,21 @@ exports.updateCategory = async (req, res) => {
 
 exports.deleteCategory = async (req, res) => {
   const { _id } = req.params;
+
   try {
     const category = await Category.findByIdAndDelete(_id);
+     if (!category) {
+       return res
+         .status(statusCodes.NOT_FOUND)
+         .send({ status: "error", message: "Category not found" });
+     }
     res.status(statusCodes.OK).send({ status: "success", data: category });
   } catch (error) {
+    if (error.kind === "ObjectId") {
+      return res
+        .status(statusCodes.NOT_FOUND)
+        .send({ status: "error", message: "Category not found" });
+    }
     res.status(statusCodes.SERVER_ERROR).send({
       status: "error",
       message: error.message || "Failed to delete category. Try again",
