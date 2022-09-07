@@ -6,7 +6,7 @@ Jopa-Savvy REST API
 
 ### Products category
 
-POST /api/categories add a product category
+POST base_url/api/categories add a product category
 
 Request body:
 
@@ -30,7 +30,7 @@ Response spec:
 
 }
 
-GET /api/categories Get all product categories
+GET base_url/api/categories Get all product categories
 
 Request body:
 
@@ -73,7 +73,7 @@ Response Spec:
     ]
 
 }
-GET /v1/categories/:_id:      // Get one category
+GET base_url/v1/categories/:_id:      // Get one category
 
 Response spec:
 

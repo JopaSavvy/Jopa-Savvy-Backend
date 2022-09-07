@@ -17,7 +17,7 @@ const {
 const credentials = [
   "BCRYPT_SALT",
   "JWT_SECRET",
-  "MONGODB_URL_DEV",
+  // "MONGODB_URL_DEV",
   "MONGODB_URL_PROD",
   "FIREBASE_APIKEY",
   "FIREBASE_AUTHDOMAIN",

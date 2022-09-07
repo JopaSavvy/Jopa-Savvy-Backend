@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { MONGODB_URL_DEV, MONGODB_URL_PROD } = require("../helpers/secrets");
+const { MONGODB_URL_PROD } = require("../helpers/secrets");
 
 mongoose.connect(MONGODB_URL_PROD, { useNewUrlParser: true }, (error) => {
   if (error) {
